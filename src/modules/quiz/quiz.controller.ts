@@ -14,7 +14,8 @@ export class QuizController {
     @Post()
     @HttpCode(200)
     @UsePipes(ValidationPipe)
-    createQuiz(@Body() quizData: CreateQuizDto) {
-        return { success: true, message: "created successfully", data: quizData };
+    async createQuiz(@Body() quizData: CreateQuizDto) {
+        const resp = await this.quizService.createQuiz(quizData);
+        return { success: true, message: "created successfully", data: resp };
     }
 }
