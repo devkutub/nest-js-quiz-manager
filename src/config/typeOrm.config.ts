@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Quiz } from '../modules/quiz/quiz.entity';
+import { Quiz } from '../modules/quiz/entities/quiz.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
     type: 'postgres',
