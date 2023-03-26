@@ -8,7 +8,7 @@ export class QuizController {
     constructor(private quizService: QuizService) { }
 
     @Get()
-    getAllQuiz(): Array<number | string> {
+    getAllQuiz(): Promise<Quiz[]> {
         return this.quizService.getAllQuiz();
     }
 

@@ -7,8 +7,13 @@ import { Quiz } from "../entities/quiz.entity";
 @Injectable()
 export default class QuizService {
     constructor(@InjectRepository(Quiz) private quizRepository: Repository<Quiz>) { }
-    getAllQuiz(): Array<number | string> {
-        return [1, 2, 3, "r", "from the service"]
+    async getAllQuiz(): Promise<Quiz[]> {
+        return await this.quizRepository
+            // .find({ relations: ['questions'] });
+            .createQueryBuilder('q')
+            .leftJoinAndSelect('q.questions', "qt", "title")
+            // .leftJoinAndSelect('qt.options', 'o')
+            .getMany();
     }
 
     async getQuizById(id: number) {
