@@ -11,13 +11,13 @@ export default class QuizService {
         return await this.quizRepository
             // .find({ relations: ['questions'] });
             .createQueryBuilder('q')
-            .leftJoinAndSelect('q.questions', "qt", "title")
-            // .leftJoinAndSelect('qt.options', 'o')
+            .leftJoinAndSelect('q.questions', "qt")
+            .leftJoinAndSelect('qt.options', 'o')
             .getMany();
     }
 
     async getQuizById(id: number) {
-        return await this.quizRepository.findOne({ where: { id }, relations: ['questions'] });
+        return await this.quizRepository.findOne({ where: { id }, relations: ['questions', 'questions.options'] });
     }
 
     async createQuiz(quizData: CreateQuizDto) {
